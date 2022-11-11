@@ -1,0 +1,29 @@
+{
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.json",
+    "./src/**/*.d.ts"
+  ],
+  "exclude": [
+    "./src/**/*.spec.ts"
+  ],
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "declaration": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "lib": ["es2021", "DOM"],
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+}

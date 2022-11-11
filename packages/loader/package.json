@@ -1,0 +1,17 @@
+{
+	"name": "@hexademo/loader",
+	"version": "1.0.0",
+	"description": "",
+	"main": "dist/src/index.js",
+	"types": "dist/src/index.d.ts",
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@hexademo/adapters": "workspace:*",
+		"@hexademo/domain": "workspace:*"
+	},
+	"devDependencies": {
+		"tsconfig": "workspace:*"
+	}
+}

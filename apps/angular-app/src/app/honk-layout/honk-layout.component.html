@@ -1,0 +1,19 @@
+	<div class="container">
+		<header>
+			<nav>
+				<ul>
+					<li>
+						<h1>
+							<a routerLink="/">
+								<img src="../../assets/new-logo.svg" alt="" /> Honk
+							</a>
+						</h1>
+					</li>
+				</ul>
+        <ng-content select="[header]"></ng-content>
+			</nav>
+		</header>
+		<main>
+			  <ng-content select="[main]"></ng-content>
+		</main>
+	</div>

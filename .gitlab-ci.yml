@@ -1,0 +1,114 @@
+image: node:16
+
+stages:
+  - ✅ lint
+  - 🧪 unit
+  - 🧪 e2e
+  - 🕵️ review
+  - pages
+
+.install:
+  before_script:
+    - corepack enable
+    - pnpm config set store-dir ${CI_PROJECT_DIR}/${PROJECT_ROOT}/.pnpm-store
+    - pnpm install
+
+.e2e:
+  stage: 🧪 e2e
+  image: mcr.microsoft.com/playwright:v1.27.0-focal
+  extends: .install
+  script:
+    - pnpm run build
+    - pnpm --filter @hexademo/web-components run build
+    - pnpx playwright install
+    - pnpm test:e2e
+  artifacts:
+    when: always
+    expire_in: 1 day
+    paths:
+      - e2e/playwright-report
+  needs: []
+
+lint:
+  stage: ✅ lint
+  extends: .install
+  script:
+    - pnpm lint
+  needs: []
+
+test:unit:
+  stage: 🧪 unit
+  extends: .install
+  script:
+    - pnpm test:coverage
+  artifacts:
+    when: always
+    expire_in: 1 day
+    paths:
+      - coverage
+    reports:
+      junit:
+        - coverage/junit.xml
+  needs: []
+
+angularjs:
+  extends: .e2e
+  variables:
+    RUNAPP: "angularjs"
+
+angular:
+  extends: .e2e
+  variables:
+    RUNAPP: "angular"
+
+vuejs:
+  extends: .e2e
+  variables:
+    RUNAPP: "vuejs"
+
+react:
+  extends: .e2e
+  variables:
+    RUNAPP: "react"
+
+pages:
+  stage: pages
+  extends: .install
+  script:
+    - pnpm slides:html
+    - pnpm slidesfunc:html
+    - pnpm ci:pages
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+
+review_app:
+  stage: 🕵️ review
+  extends: .install
+  script:
+    - pnpm run build
+    - pnpm --filter @hexademo/web-components run build
+    - pnpm --filter @hexademo/vue-app run build --base=/-/$CI_PROJECT_NAME/-/jobs/${CI_JOB_ID}/artifacts/apps/vue-app/dist
+  artifacts:
+    paths:
+      - apps/vue-app/dist
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    url: https://${CI_PROJECT_NAMESPACE}.gitlab.io/-/$CI_PROJECT_NAME/-/jobs/${CI_JOB_ID}/artifacts/apps/vue-app/dist/index.html
+    on_stop: stop_review_app
+    auto_stop_in: 1 week
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+
+stop_review_app:
+  stage: 🕵️ review
+  script:
+    - echo "👋"
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    action: stop
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: manual

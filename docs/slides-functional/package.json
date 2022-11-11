@@ -1,0 +1,14 @@
+{
+  "name": "@hexademo/slides-functional",
+  "version": "1.0.0",
+  "scripts": {
+    "build:html": "marp slides.md -o index.html",
+    "build:pdf": "marp slides.md -o slides.pdf"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@marp-team/marp-cli": "^2.1.2"
+  }
+}

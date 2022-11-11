@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+.tweet-card {
+  padding: 1rem 0;
+}
+
+button {
+  width: auto;
+  display: inline;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0;
+  font-size: 0.75em;
+}
+
+p {
+  margin-bottom: 0.5rem;
+}
+
+.tweet-card__author {
+  font-size: 0.75rem;
+}

@@ -1,0 +1,32 @@
+{
+  "name": "angularjs-app",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "prebuild": "pnpm check",
+    "build": "pnpm check && vite build",
+    "preview": "vite preview",
+    "check": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/angular": "^1.8.4",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.3"
+  },
+  "dependencies": {
+    "@hexademo/adapters": "workspace:*",
+    "@hexademo/domain": "workspace:*",
+    "@hexademo/loader": "workspace:*",
+    "@hexademo/style": "workspace:*",
+    "@hexademo/web-components": "workspace:*",
+    "@picocss/pico": "^1.5.3",
+    "@uirouter/angularjs": "^1.0.30",
+    "angular": "^1.8.3",
+    "sass": "^1.54.4"
+  }
+}

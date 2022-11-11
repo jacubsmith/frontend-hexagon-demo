@@ -1,0 +1,28 @@
+<honk-layout>
+  <slot-header>
+    <div>
+      <ul>
+        <li>{{$ctrl.username}}</li>
+        <li>
+          <button ng-click="$ctrl.logout()" class="outline">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </slot-header>
+  <slot-main>
+    <article>
+      <header>
+        <create-tweet></create-tweet>
+      </header>
+      <tweet-card
+        ng-repeat="tweet in $ctrl.tweets track by tweet.id"
+        tweet-id="{{tweet.id}}"
+        author="{{tweet.author}}"
+        message="{{tweet.message}}"
+        created-at="{{tweet.createdAt}}"
+        likes="{{tweet.likes}}"
+        ng-on-tweetLiked="$ctrl.handleTweetLikedEvent(tweet.id, $index)"
+      />
+    </article>
+  </slot-main>
+</honk-layout>

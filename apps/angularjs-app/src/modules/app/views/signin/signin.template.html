@@ -1,0 +1,17 @@
+<honk-layout>
+  <slot-main>
+    <tweet-sign
+      form-title="Sign in"
+      btn-label="Login"
+      img="https://source.unsplash.com/uymG7UVPXpI/1000x1200"
+      username="{{$ctrl.username}}"
+      password="{{$ctrl.password}}"
+      ng-on-signSubmited="$ctrl.handleSignEvent($event)"
+    >
+      <p class="sign-option">
+        Don't have an account yet?
+        <a href="/#/signup">Register now</a>
+      </p>
+    </tweet-sign>
+  </slot-main>
+</honk-layout>

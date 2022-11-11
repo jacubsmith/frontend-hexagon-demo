@@ -1,0 +1,52 @@
+{
+	"name": "@hexademo/root",
+	"version": "1.0.0",
+	"description": "",
+	"packageManager": "pnpm@7.11.0",
+	"engineStrict": true,
+	"engines": {
+		"pnpm": "7.11.0",
+		"node": ">=16"
+	},
+	"scripts": {
+		"build": "run-p build:wc build:tsc",
+		"build:watch": "run-p build:tsc:watch",
+		"build:wc": "pnpm --filter web-components run build",
+		"build:tsc": "tsc --noEmit && tsc --build",
+		"build:tsc:watch": "tsc --build --watch",
+		"prebuild": "tsc --build --clean",
+		"test": "vitest",
+		"test:coverage": "vitest --coverage",
+		"test:ui": "vitest --ui",
+		"test:e2e": "pnpm --filter e2e run test",
+		"lint": "eslint \"{apps,packages}/**/*.{js,ts}\"",
+		"lint:fix": "npm run lint -- --fix",
+		"angularjsapp": "pnpm --filter angularjs-app run dev",
+		"angularapp": "pnpm --filter angular-app run start",
+		"reactapp": "pnpm --filter react-app run dev",
+		"vueapp": "pnpm --filter vue-app run dev",
+		"vueapp:build": "pnpm --filter vue-app run build",
+		"backend": "pnpm --filter backend-api run dev",
+		"rundemo": "run-p backend vueapp build:tsc:watch",
+		"slides:html": "pnpm --filter @hexademo/slides build:html",
+		"slidesfunc:html": "pnpm --filter @hexademo/slides-functional build:html",
+		"slides:pdf": "pnpm --filter @hexademo/slides build:pdf",
+		"ci:pages": "mkdir public && cp -R docs/slides/index.html docs/slides/assets public/ && cp -R docs/slides-functional/index.html public/functional.html"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "BSD-3-Clause",
+	"devDependencies": {
+		"@tsconfig/node16": "^1.0.3",
+		"@typescript-eslint/eslint-plugin": "^5.38.0",
+		"@typescript-eslint/parser": "^5.38.0",
+		"@vitest/coverage-c8": "^0.22.1",
+		"eslint-config-hexademo": "workspace:1.0.0",
+		"tsconfig": "workspace:1.0.0",
+		"typescript": "^4.8.3",
+		"vitest": "^0.22.1"
+	},
+	"dependencies": {
+		"npm-run-all": "^4.1.5"
+	}
+}

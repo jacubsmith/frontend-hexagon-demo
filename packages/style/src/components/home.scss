@@ -1,0 +1,10 @@
+article {
+	margin: 0 0 2rem;
+}
+
+tweet-card {
+	border-bottom: var(--border-width) solid var(--card-border-color);
+	&:last-of-type {
+		border-bottom: none;
+	}
+}

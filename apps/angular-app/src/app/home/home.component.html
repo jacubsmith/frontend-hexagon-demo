@@ -1,0 +1,26 @@
+<honk-layout>
+	<div header>
+		<ul>
+			<li>{{ username }}</li>
+			<li>
+				<button (click)="logout()" class="outline">Logout</button>
+			</li>
+		</ul>
+	</div>
+
+	<article main>
+		<header>
+			<tweet-create></tweet-create>
+		</header>
+		<tweet-card
+			*ngFor="let tweet of tweets; let i = index"
+			[key]="tweet.id"
+			id="`tweet-card-{{tweet.id}}`"
+			[tweetId]="tweet.id"
+			[author]="tweet.author"
+			[message]="tweet.message"
+			[createdAt]="tweet.createdAt"
+			[likes]="tweet.likes"
+		></tweet-card>
+	</article>
+</honk-layout>
